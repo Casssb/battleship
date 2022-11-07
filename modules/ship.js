@@ -1,7 +1,8 @@
 class Ship {
   hits = 0;
-  constructor(length) {
+  constructor(length, array = null) {
     this.length = length;
+    if (array) this.coords = [...array];
   }
 
   hit() {

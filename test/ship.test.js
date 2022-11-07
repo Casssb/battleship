@@ -1,5 +1,5 @@
 import Ship from '../modules/ship';
-import { describe, expect, test, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 describe('basic methods/paramters', () => {
   it('length is equal to value entered to constructor', () => {
@@ -20,5 +20,9 @@ describe('basic methods/paramters', () => {
     ship.hit();
     ship.hit();
     expect(ship.isSunk()).toBe(true);
+  });
+  it('coords should return an array if entered into constructor', () => {
+    const ship = new Ship(4, [2, 4, 8]);
+    expect(ship.coords).toStrictEqual([2, 4, 8]);
   });
 });
