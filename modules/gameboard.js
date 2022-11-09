@@ -2,7 +2,8 @@ import Ship from './ship';
 
 class Gameboard {
   possibleMoves = new Set(...[this.createMoves()]);
-  misses = [];
+  hitsArray = [];
+  missesArray = [];
   constructor(shipArray) {
     this.ships = this.createShips(shipArray);
   }
@@ -23,8 +24,27 @@ class Gameboard {
 
   receiveAttack(guess) {
     if (!this.possibleMoves.has(guess)) {
-      return 'Already tried';
+      return 0;
+    } else {
+      this.possibleMoves.delete(guess);
+      this.handltHitOrMiss(guess);
     }
+  }
+
+  handltHitOrMiss(validMove) {
+    this.ships.forEach((ship) => {
+      if (ship.coords.includes(validMove)) {
+        ship.hit();
+        this.hitsArray.push(validMove);
+        this.checkForWin();
+      } else {
+        this.missesArray.push(validMove);
+      }
+    });
+  }
+
+  checkForWin() {
+    return this.ships.map((ship) => ship.isSunk()).length === this.ships.length;
   }
 }
 
