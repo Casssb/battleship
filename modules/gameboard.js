@@ -28,6 +28,7 @@ class Gameboard {
     } else {
       this.possibleMoves.delete(guess);
       this.handltHitOrMiss(guess);
+      return 1;
     }
   }
 
@@ -36,15 +37,18 @@ class Gameboard {
       if (ship.coords.includes(validMove)) {
         ship.hit();
         this.hitsArray.push(validMove);
-        this.checkForWin();
-      } else {
-        this.missesArray.push(validMove);
       }
     });
+    const flatShipCoords = this.ships.map((ship) => ship.coords).flat();
+    if (!flatShipCoords.includes(validMove)) {
+      this.missesArray.push(validMove);
+    }
   }
 
   checkForWin() {
-    return this.ships.map((ship) => ship.isSunk()).length === this.ships.length;
+    return (
+      this.ships.filter((ship) => ship.isSunk()).length === this.ships.length
+    );
   }
 }
 
