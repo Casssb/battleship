@@ -56,8 +56,10 @@ describe('gameboard methods', () => {
     board.receiveAttack(77);
     expect(board.hitsArray[0]).toBe(5);
     expect(board.hitsArray[1]).toEqual(77);
+    expect(board.hitsArray[2]).toEqual(undefined);
     expect(board.missesArray[0]).toBe(10);
     expect(board.missesArray[1]).toBe(99);
+    expect(board.missesArray[2]).toBe(undefined);
   });
   it('ReceiveAttack should only accept a valid move once, it should then be removed from the set', () => {
     const board = new Gameboard([
