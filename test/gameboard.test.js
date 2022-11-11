@@ -1,5 +1,5 @@
 import Gameboard from '../modules/gameboard';
-import { describe, expect, test, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 describe('gameboard methods', () => {
   it('constructor should convert array of coords into array of ship objects', () => {
@@ -91,5 +91,13 @@ describe('gameboard methods', () => {
     board.receiveAttack(4);
     board.receiveAttack(8);
     expect(board.checkForWin()).toBe(true);
+  });
+  it('getShipCoords should return flat array of all ship coords passed to constructor', () => {
+    const board = new Gameboard([
+      [1, 4, 8],
+      [2, 10, 22],
+    ]);
+    const flat = board.getShipCoords();
+    expect(flat).toStrictEqual([1, 4, 8, 2, 10, 22]);
   });
 });

@@ -39,7 +39,7 @@ class Gameboard {
         this.hitsArray.push(validMove);
       }
     });
-    const flatShipCoords = this.ships.map((ship) => ship.coords).flat();
+    const flatShipCoords = this.getShipCoords();
     if (!flatShipCoords.includes(validMove)) {
       this.missesArray.push(validMove);
     }
@@ -49,6 +49,10 @@ class Gameboard {
     return (
       this.ships.filter((ship) => ship.isSunk()).length === this.ships.length
     );
+  }
+
+  getShipCoords() {
+    return this.ships.map((ship) => ship.coords).flat();
   }
 }
 
