@@ -1,17 +1,20 @@
 import Gameboard from './gameboard';
+import generateFleet from './generateCoords';
+import aiMove from './aiLogic';
 
 class Player {
-  constructor(name = null, shipArray) {
-    this.name = name;
+  constructor(shipArray = generateFleet(), name = null, turn = false) {
     this.board = new Gameboard(shipArray);
-    this.turn = false;
+    this.name = name;
+    this.turn = turn;
   }
   changeTurn() {
     this.turn = !this.turn;
   }
-  attack(enemyBoard, coord) {
+  attack(enemyBoard, coord = null) {
     if (!this.turn) return;
-    return enemyBoard.receiveAttack(coord);
+    if (coord) return enemyBoard.receiveAttack(coord);
+    if (!coord) return enemyBoard.receiveAttack(aiMove(enemyBoard));
   }
 }
 
