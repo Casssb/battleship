@@ -1,18 +1,65 @@
 @import url('sanitize.css');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Poppins:wght@700&display=swap');
+
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+  --ff-main: 'Poppins', sans-serif;
+  --ff-title: 'Alfa Slab One', cursive;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #333333;
+  --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
+  --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+  --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+  --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
+  --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
+  --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+  --font-size-xxxl: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --col-main: #554d74;
+  --col-secondary: #796ea8;
+  --col-text: #16131a;
+  --col-highlight: #d3d9e9;
+  --col-accent: #a6a9c8;
+}
+
+body {
+  background-color: var(--col-main);
+  color: var(--col-text);
+  @include flex(column);
+}
+
+header {
+  height: min-content;
+}
+
+.header-title {
+  font-family: var(--ff-title);
+  font-size: var(--font-size-xl);
+}
+
+main {
+  height: 100%;
+  @include flex(row);
+  gap: var(--font-size-xl);
+}
+
+.gameboard {
+  @include flex(column);
+}
+
+.player-board,
+.bot-board {
+  background-color: var(--col-accent);
+  display: grid;
+  grid-template-columns: repeat(10, 4.5vmin);
+  grid-template-rows: repeat(10, 4.5vmin);
+}
+
+.player-tile, .bot-tile {
+  border: 1px solid black;
 }
