@@ -54,6 +54,14 @@ class Gameboard {
   getShipCoords() {
     return this.ships.map((ship) => ship.coords).flat();
   }
+
+  hasCausedSinking(coord) {
+    const flatSunkShipsArray = this.ships
+      .filter((ship) => ship.isSunk())
+      .map((ship) => ship.coords)
+      .flat();
+    return flatSunkShipsArray.includes(coord);
+  }
 }
 
 export default Gameboard;

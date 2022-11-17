@@ -1,4 +1,6 @@
 import './style.scss';
-import { appendBoards } from './modules/domViews';
+import { init } from './modules/gameController';
+import { appendBoardListeners } from './modules/domViews';
 
-appendBoards();
+init();
+appendBoardListeners();

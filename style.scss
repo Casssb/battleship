@@ -25,6 +25,9 @@
   --col-text: #16131a;
   --col-highlight: #d3d9e9;
   --col-accent: #a6a9c8;
+
+  --box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 body {
@@ -58,8 +61,27 @@ main {
   display: grid;
   grid-template-columns: repeat(10, 4.5vmin);
   grid-template-rows: repeat(10, 4.5vmin);
+  border: 2px solid black;
+  box-shadow: var(--box-shadow);
 }
 
-.player-tile, .bot-tile {
+.player-tile,
+.bot-tile {
   border: 1px solid black;
+}
+
+.ship {
+  background-color: blue;
+}
+
+.hit {
+  background-color: orange;
+}
+
+.miss {
+  background-color: lightblue;
+}
+
+.sunk {
+  background-color: red;
 }
