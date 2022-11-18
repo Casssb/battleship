@@ -11,7 +11,7 @@
     <header>
       <h1 class="header-title">Battleship</h1>
     </header>
-    <main>
+    <main id="main">
       <div class="gameboard">
         <h2 class="player-title">Player1</h2>
       </div>
@@ -19,5 +19,15 @@
         <h2 class="bot-title">Bot</h2>
       </div>
     </main>
+    <div class="start-modal" id="start-modal">
+      <h3>Place your 5 ships</h3>
+      <button id="rotate">Rotate Ship</button>
+      <div class="gameboard"></div>
+      <button id="start-btn">Start Game</button>
+    </div>
+    <div class="end-modal" id="end-modal">
+      <h3 class="result-text" id="result"></h3>
+      <button id="reset-button">New Game</button>
+    </div>
   </body>
 </html>

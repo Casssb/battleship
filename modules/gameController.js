@@ -7,7 +7,7 @@ import {
   appendBoardListeners,
 } from './domViews';
 
-const player = new Player(generateFleet(), 'bob', true);
+const player = new Player(generateFleet(), true);
 const bot = new Player();
 
 const changeTurns = () => {

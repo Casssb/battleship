@@ -35,6 +35,12 @@ const aiMove = (enemyBoard) => {
         hits.push(moveLow);
       }
       return moveLow;
+    } else {
+      const randomMove = potentialMoves[randomChoice];
+      if (potentialHits.includes(randomMove)) {
+        hits.push(randomMove);
+      }
+      return randomMove;
     }
   } else if (hits.length === 1) {
     console.log(hits);

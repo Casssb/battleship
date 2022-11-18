@@ -13,12 +13,14 @@ const createBoard = (name) => {
 };
 
 const appendBoards = () => {
-  const [playerBoardContainer, botBoardContainer] =
+  const [playerBoardContainer, botBoardContainer, startBoardContainer] =
     document.querySelectorAll('.gameboard');
   const playerBoard = createBoard('player');
   const botBoard = createBoard('bot');
+  const startBoard = createBoard('start');
   playerBoardContainer.append(playerBoard);
   botBoardContainer.append(botBoard);
+  startBoardContainer.append(startBoard);
 };
 
 const appendPlayerBoardStyles = (playerboard) => {
@@ -43,7 +45,6 @@ const appendPlayerBoardStyles = (playerboard) => {
 
 const appendBotBoardStyles = (botBoard) => {
   const botTiles = document.querySelectorAll('.bot-tile');
-  const shipCoords = botBoard.getShipCoords();
   botTiles.forEach((tile) => {
     const coords = Number(tile.dataset.index);
     if (botBoard.hitsArray.includes(coords)) {

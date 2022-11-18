@@ -8,6 +8,31 @@
   align-items: center;
 }
 
+@mixin modal {
+  position: absolute;
+  @include flex(column);
+  gap: 2rem;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  font-family: var(--ff-main);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+@mixin button {
+  font-family: var(--ff-main);
+  font-size: var(--font-size-md);
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--col-highlight);
+  box-shadow: var(--box-shadow);
+}
+
 :root {
   --ff-main: 'Poppins', sans-serif;
   --ff-title: 'Alfa Slab One', cursive;
@@ -45,10 +70,12 @@ header {
   font-size: var(--font-size-xl);
 }
 
+/* Main section (player/bot gameboards) */
 main {
   height: 100%;
   @include flex(row);
   gap: var(--font-size-xl);
+  font-family: var(--ff-main);
 }
 
 .gameboard {
@@ -56,7 +83,8 @@ main {
 }
 
 .player-board,
-.bot-board {
+.bot-board,
+.start-board {
   background-color: var(--col-accent);
   display: grid;
   grid-template-columns: repeat(10, 4.5vmin);
@@ -66,7 +94,8 @@ main {
 }
 
 .player-tile,
-.bot-tile {
+.bot-tile,
+.start-tile {
   border: 1px solid black;
 }
 
@@ -84,4 +113,42 @@ main {
 
 .sunk {
   background-color: red;
+}
+
+/* Start-game modal */
+
+.start-modal {
+  @include modal();
+  display: flex;
+
+  h3 {
+    font-family: var(--ff-title);
+    font-size: var(--font-size-md);
+    text-shadow: 0px 2px 14px rgba(235, 234, 234, 0.77);
+  }
+
+  button {
+    @include button();
+
+    &:hover {
+      cursor: pointer;
+      background-color: #89898b;
+    }
+  }
+}
+
+/* End-game modal */
+
+.end-modal {
+  @include modal();
+  display: none;
+
+  button {
+    @include button();
+
+    &:hover {
+      cursor: pointer;
+      background-color: #89898b;
+    }
+  }
 }

@@ -3,9 +3,8 @@ import generateFleet from './generateCoords';
 import aiMove from './aiLogic';
 
 class Player {
-  constructor(shipArray = generateFleet(), name = null, turn = false) {
+  constructor(shipArray = generateFleet(), turn = false) {
     this.board = new Gameboard(shipArray);
-    this.name = name;
     this.turn = turn;
   }
   changeTurn() {
