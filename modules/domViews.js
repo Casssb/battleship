@@ -62,8 +62,13 @@ const appendBoardListeners = () => {
   const tiles = document.querySelectorAll('.bot-tile');
   tiles.forEach((tile) => {
     const coords = Number(tile.dataset.index);
-    tile.addEventListener('click', () => {
-      gameLoop(coords);
+    tile.addEventListener('click', (e) => {
+      const classes = e.currentTarget.classList;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (!classes.contains('hit') && !classes.contains('miss')) {
+        gameLoop(coords);
+      }
     });
   });
 };

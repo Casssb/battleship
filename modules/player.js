@@ -13,8 +13,9 @@ class Player {
   }
   attack(enemyBoard, coord = null) {
     if (!this.turn) return;
-    if (coord) return enemyBoard.receiveAttack(coord);
-    if (!coord) return enemyBoard.receiveAttack(aiMove(enemyBoard));
+    if (Number.isInteger(coord)) return enemyBoard.receiveAttack(coord);
+    if (coord === null)
+      return enemyBoard.receiveAttack(aiMove(enemyBoard));
   }
 }
 
