@@ -62,6 +62,13 @@ class Gameboard {
       .flat();
     return flatSunkShipsArray.includes(coord);
   }
+
+  getSunkCoords(coord) {
+    return this.ships
+      .filter((ship) => ship.isSunk() && ship.coords.includes(coord))
+      .map((ship) => ship.coords)
+      .flat();
+  }
 }
 
 export default Gameboard;

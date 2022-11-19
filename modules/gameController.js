@@ -1,4 +1,5 @@
 import Player from './player';
+import endGameController from './endModal';
 import {
   appendStartBoardStyles,
   appendBotBoardStyles,
@@ -18,10 +19,12 @@ const init = (playerShips) => {
   const gameLoop = (coords) => {
     player.attack(bot.board, coords);
     appendBotBoardStyles(bot.board);
+    if (bot.board.checkForWin()) endGameController('player');
     changeTurns();
     setTimeout(() => {
       bot.attack(player.board);
       appendPlayerBoardStyles(player.board);
+      if (player.board.checkForWin()) endGameController('bot');
       changeTurns();
     }, 200);
   };

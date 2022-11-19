@@ -21,6 +21,16 @@ const appendBoards = () => {
   startBoardContainer.append(startBoard);
 };
 
+const resetBoards = () => {
+  const startBoard = document.querySelector('.start-board');
+  const playerBoard = document.querySelector('.player-board');
+  const botBoard = document.querySelector('.bot-board');
+  startBoard.remove();
+  playerBoard.remove();
+  botBoard.remove();
+  appendBoards();
+};
+
 const appendStartBoardStyles = (playerboard) => {
   const starttiles = document.querySelectorAll('.start-tile');
   const shipCoords = playerboard.getShipCoords();
@@ -85,6 +95,7 @@ const appendGameboardListeners = (callback) => {
 
 export {
   appendBoards,
+  resetBoards,
   appendStartBoardStyles,
   appendPlayerBoardStyles,
   appendBotBoardStyles,

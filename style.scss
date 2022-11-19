@@ -135,6 +135,10 @@ main {
   button {
     @include button();
 
+    &.go {
+      background-color: green;
+    }
+
     &:hover {
       cursor: pointer;
       background-color: #89898b;

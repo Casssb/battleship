@@ -1,6 +1,6 @@
 import Gameboard from './gameboard';
 import { generateFleet } from './generateCoords';
-import aiMove from './aiLogic';
+import { aiMove } from './aiLogic';
 
 class Player {
   constructor(shipArray = generateFleet(), turn = false) {

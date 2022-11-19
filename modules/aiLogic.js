@@ -1,15 +1,29 @@
 let hits = [];
 
+const clearHitsArray = () => {
+  hits.length = 0;
+};
+
+const removeSuccessfullHits = (hit, enemyBoard) => {
+  const sunkArray = enemyBoard.getSunkCoords(hit);
+  hits.forEach((hit, index) => {
+    if (sunkArray.includes(hit)) {
+      hits.splice(index, 1);
+    }
+  });
+};
+
 const checkHitsArray = (enemyBoard) => {
   hits.forEach((hit) => {
     if (enemyBoard.hasCausedSinking(hit)) {
-      hits = [];
+      removeSuccessfullHits(hit, enemyBoard);
     }
   });
 };
 
 const aiMove = (enemyBoard) => {
   checkHitsArray(enemyBoard);
+  console.log(hits);
   const potentialMoves = [...enemyBoard.possibleMoves];
   const potentialHits = enemyBoard.getShipCoords();
   const randomChoice = Math.floor(Math.random() * potentialMoves.length);
@@ -72,4 +86,4 @@ const aiMove = (enemyBoard) => {
   }
 };
 
-export default aiMove;
+export { aiMove, clearHitsArray };
