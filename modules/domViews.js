@@ -6,7 +6,7 @@ const createBoard = (name) => {
   for (let i = 0; i < 100; i++) {
     const tile = document.createElement('div');
     tile.classList.add(`${name}-tile`);
-    tile.setAttribute('data-index', `${i}`);
+    tile.setAttribute(`data-${name}`, `${i}`);
     board.append(tile);
   }
   return board;
@@ -27,7 +27,7 @@ const appendPlayerBoardStyles = (playerboard) => {
   const playertiles = document.querySelectorAll('.player-tile');
   const shipCoords = playerboard.getShipCoords();
   playertiles.forEach((tile) => {
-    const coords = Number(tile.dataset.index);
+    const coords = Number(tile.dataset.player);
     if (shipCoords.includes(coords)) {
       tile.classList.add('ship');
     }
@@ -46,7 +46,7 @@ const appendPlayerBoardStyles = (playerboard) => {
 const appendBotBoardStyles = (botBoard) => {
   const botTiles = document.querySelectorAll('.bot-tile');
   botTiles.forEach((tile) => {
-    const coords = Number(tile.dataset.index);
+    const coords = Number(tile.dataset.bot);
     if (botBoard.hitsArray.includes(coords)) {
       tile.classList.add('hit');
     }
@@ -59,10 +59,10 @@ const appendBotBoardStyles = (botBoard) => {
   });
 };
 
-const appendBoardListeners = () => {
+const appendGameboardListeners = () => {
   const tiles = document.querySelectorAll('.bot-tile');
   tiles.forEach((tile) => {
-    const coords = Number(tile.dataset.index);
+    const coords = Number(tile.dataset.bot);
     tile.addEventListener('click', (e) => {
       const classes = e.currentTarget.classList;
       e.preventDefault();
@@ -78,5 +78,5 @@ export {
   appendBoards,
   appendPlayerBoardStyles,
   appendBotBoardStyles,
-  appendBoardListeners,
+  appendGameboardListeners,
 };

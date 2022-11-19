@@ -137,6 +137,16 @@ main {
   }
 }
 
+/* start game board */
+
+.hover {
+  background-color: #16131a81;
+}
+
+.clicked {
+  background-color: var(--col-main);
+}
+
 /* End-game modal */
 
 .end-modal {

@@ -1,10 +1,11 @@
 import Player from './player';
 import generateFleet from './generateCoords';
+import { appendStartModalListeners } from './placeShips';
 import {
   appendBoards,
   appendBotBoardStyles,
   appendPlayerBoardStyles,
-  appendBoardListeners,
+  appendGameboardListeners,
 } from './domViews';
 
 const player = new Player(generateFleet(), true);
@@ -28,7 +29,8 @@ const gameLoop = (coords) => {
 
 const init = () => {
   appendBoards();
-  appendBoardListeners();
+  appendGameboardListeners();
+  appendStartModalListeners();
   appendPlayerBoardStyles(player.board);
   appendBotBoardStyles(bot.board);
 };

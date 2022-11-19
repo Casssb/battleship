@@ -22,8 +22,6 @@ const aiMove = (enemyBoard) => {
     const lowestHit = Math.min(...hits);
     const moveHigh = highestHit + offset;
     const moveLow = lowestHit - offset;
-    console.log(potentialMoves);
-    console.log(hits);
 
     if (potentialMoves.includes(moveHigh)) {
       if (potentialHits.includes(moveHigh)) {
@@ -43,9 +41,7 @@ const aiMove = (enemyBoard) => {
       return randomMove;
     }
   } else if (hits.length === 1) {
-    console.log(hits);
     const move = hits[0];
-    console.log(move);
     if (potentialMoves.includes(move + 1)) {
       if (potentialHits.includes(move + 1)) {
         hits.push(move + 1);
