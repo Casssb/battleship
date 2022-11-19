@@ -1,4 +1,6 @@
 import './style.scss';
-import { init } from './modules/gameController';
+import { appendBoards } from './modules/domViews';
+import { appendStartModalListeners } from './modules/placeShips';
 
-init();
+appendBoards();
+appendStartModalListeners();

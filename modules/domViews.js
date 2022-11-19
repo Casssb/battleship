@@ -1,5 +1,3 @@
-import { gameLoop } from './gameController';
-
 const createBoard = (name) => {
   const board = document.createElement('div');
   board.classList.add(`${name}-board`);
@@ -21,6 +19,17 @@ const appendBoards = () => {
   playerBoardContainer.append(playerBoard);
   botBoardContainer.append(botBoard);
   startBoardContainer.append(startBoard);
+};
+
+const appendStartBoardStyles = (playerboard) => {
+  const starttiles = document.querySelectorAll('.start-tile');
+  const shipCoords = playerboard.getShipCoords();
+  starttiles.forEach((tile) => {
+    const coords = Number(tile.dataset.start);
+    if (shipCoords.includes(coords)) {
+      tile.classList.add('ship');
+    }
+  });
 };
 
 const appendPlayerBoardStyles = (playerboard) => {
@@ -59,7 +68,7 @@ const appendBotBoardStyles = (botBoard) => {
   });
 };
 
-const appendGameboardListeners = () => {
+const appendGameboardListeners = (callback) => {
   const tiles = document.querySelectorAll('.bot-tile');
   tiles.forEach((tile) => {
     const coords = Number(tile.dataset.bot);
@@ -68,7 +77,7 @@ const appendGameboardListeners = () => {
       e.preventDefault();
       e.stopImmediatePropagation();
       if (!classes.contains('hit') && !classes.contains('miss')) {
-        gameLoop(coords);
+        callback(coords);
       }
     });
   });
@@ -76,6 +85,7 @@ const appendGameboardListeners = () => {
 
 export {
   appendBoards,
+  appendStartBoardStyles,
   appendPlayerBoardStyles,
   appendBotBoardStyles,
   appendGameboardListeners,

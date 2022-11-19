@@ -82,4 +82,4 @@ const generateFleet = () => {
   return fleetArray;
 };
 
-export default generateFleet;
+export { generateFleet };

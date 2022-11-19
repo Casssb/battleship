@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/boat.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="/main.js" defer></script>
+    <script type="module" src="/main.js" defer async></script>
     <title>Battleship</title>
   </head>
   <body>
@@ -21,7 +21,10 @@
     </main>
     <div class="start-modal" id="start-modal">
       <h3>Place your 5 ships</h3>
-      <button id="rotate">Rotate Ship</button>
+      <div class="start-btn-container">
+        <button id="rotate">Rotate Ship</button>
+        <button id="random-ships">Random Ships</button>
+      </div>
       <div class="gameboard"></div>
       <button id="start-btn">Start Game</button>
     </div>

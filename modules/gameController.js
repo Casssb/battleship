@@ -1,38 +1,34 @@
 import Player from './player';
-import generateFleet from './generateCoords';
-import { appendStartModalListeners } from './placeShips';
 import {
-  appendBoards,
+  appendStartBoardStyles,
   appendBotBoardStyles,
   appendPlayerBoardStyles,
   appendGameboardListeners,
 } from './domViews';
 
-const player = new Player(generateFleet(), true);
-const bot = new Player();
+const init = (playerShips) => {
+  const player = new Player(playerShips, true);
+  const bot = new Player();
 
-const changeTurns = () => {
-  player.changeTurn();
-  bot.changeTurn();
-};
+  const changeTurns = () => {
+    player.changeTurn();
+    bot.changeTurn();
+  };
 
-const gameLoop = (coords) => {
-  player.attack(bot.board, coords);
-  appendBotBoardStyles(bot.board);
-  changeTurns();
-  setTimeout(() => {
-    bot.attack(player.board);
-    appendPlayerBoardStyles(player.board);
+  const gameLoop = (coords) => {
+    player.attack(bot.board, coords);
+    appendBotBoardStyles(bot.board);
     changeTurns();
-  }, 200);
-};
-
-const init = () => {
-  appendBoards();
-  appendGameboardListeners();
-  appendStartModalListeners();
+    setTimeout(() => {
+      bot.attack(player.board);
+      appendPlayerBoardStyles(player.board);
+      changeTurns();
+    }, 200);
+  };
+  appendGameboardListeners(gameLoop);
+  appendStartBoardStyles(player.board);
   appendPlayerBoardStyles(player.board);
   appendBotBoardStyles(bot.board);
 };
 
-export { init, gameLoop };
+export { init };
