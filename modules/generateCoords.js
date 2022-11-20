@@ -40,6 +40,17 @@ const shipOffsets = [
   ],
 ];
 
+const isValidShip = (flatFleetArray, ship, origin) => {
+  const taken = ship.some((coord) => flatFleetArray.includes(coord + origin)); // ship coords cannot already be present in other ships
+
+  const outOfBounds =
+    ship.some((coord) => (origin + coord) % 10 === 0) ||
+    ship.some((coord) => (origin + coord) % 10 === 9);
+  /* filters out any coord over 99 or under 0*/
+
+  return !taken && !outOfBounds;
+};
+
 const generateFleet = () => {
   const fleetArray = [];
   const generateCoords = (offset) => {
@@ -56,16 +67,7 @@ const generateFleet = () => {
     axis choice (1 or 10) along with the number of coords to use makes it truly 
     random but accounts for having too many of one axis in the choice array  */
 
-    const taken = choice.some((coord) =>
-      flatFleetArray.includes(coord + startChoice)
-    ); // Choices cannot already be present in other ships
-
-    const outOfBounds =
-      choice.some((coord) => (startChoice + coord) % 10 === 0) ||
-      choice.some((coord) => (startChoice + coord) % 10 === 9);
-    /* filters out any coord over 99 */
-
-    if (!taken && !outOfBounds) {
+    if (isValidShip(flatFleetArray, choice, startChoice)) {
       choice.forEach((coord) => {
         validShip.push(startChoice + coord);
       });
@@ -82,4 +84,4 @@ const generateFleet = () => {
   return fleetArray;
 };
 
-export { generateFleet, shipOffsets };
+export { generateFleet, shipOffsets, isValidShip };
