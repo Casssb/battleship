@@ -40,15 +40,37 @@ const shipOffsets = [
   ],
 ];
 
-const isValidShip = (flatFleetArray, ship, origin) => {
+const isValidShip = (flatFleetArray, ship, origin, axis) => {
+  const currentAxis = axis;
+  const shipLength = Number(ship.length);
+  const start = ship[0] + origin;
+  const end = ship[shipLength - 1] + origin;
+
   const taken = ship.some((coord) => flatFleetArray.includes(coord + origin)); // ship coords cannot already be present in other ships
 
-  const outOfBounds =
-    ship.some((coord) => (origin + coord) % 10 === 0) ||
-    ship.some((coord) => (origin + coord) % 10 === 9);
-  /* filters out any coord over 99 or under 0*/
+  const badHorizontal =
+    (start > 9 - shipLength && start <= 9 && end > 9) ||
+    (start > 19 - shipLength && start <= 19 && end > 19) ||
+    (start > 29 - shipLength && start <= 29 && end > 29) ||
+    (start > 39 - shipLength && start <= 39 && end > 39) ||
+    (start > 49 - shipLength && start <= 49 && end > 49) ||
+    (start > 59 - shipLength && start <= 59 && end > 59) ||
+    (start > 69 - shipLength && start <= 69 && end > 69) ||
+    (start > 79 - shipLength && start <= 79 && end > 79) ||
+    (start > 89 - shipLength && start <= 89 && end > 89);
 
-  return !taken && !outOfBounds;
+  const outOfBounds =
+    ship.some((coord) => origin + coord < 0) ||
+    ship.some((coord) => origin + coord > 99);
+  /* filter was originally 0-99 but this causes coords to wrap around grid. I added the above option to
+  stop particular horizontal coords wrapping*/
+
+  if (currentAxis === 1) {
+    return !taken && !outOfBounds;
+  } else {
+    console.log(start, end, badHorizontal, shipLength);
+    return !taken && !outOfBounds && !badHorizontal;
+  }
 };
 
 const generateFleet = () => {
@@ -58,17 +80,17 @@ const generateFleet = () => {
     const flatFleetArray = fleetArray.flat();
     const direction = Math.floor(Math.random() * 2); // either 0 for x (horizontal), 1 for y (vertical)
     const axisChoice = direction === 0 ? 1 : 10;
-    const choice = offset[direction];
+    const shipChoice = offset[direction];
     const startChoice = Math.abs(
-      Math.floor(Math.random() * 100 - choice.length * axisChoice)
+      Math.floor(Math.random() * 100 - shipChoice.length * axisChoice)
     );
     /* originally startChoice was just Math.floor(Math.random() * 100) but this was
     casuing problems with not balancing vert/horiz coords. Having it multiply by the 
     axis choice (1 or 10) along with the number of coords to use makes it truly 
-    random but accounts for having too many of one axis in the choice array  */
+    random but accounts for having too many of one axis in the shipChoice array  */
 
-    if (isValidShip(flatFleetArray, choice, startChoice)) {
-      choice.forEach((coord) => {
+    if (isValidShip(flatFleetArray, shipChoice, startChoice, direction)) {
+      shipChoice.forEach((coord) => {
         validShip.push(startChoice + coord);
       });
       fleetArray.push(validShip);
