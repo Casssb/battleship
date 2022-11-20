@@ -40,12 +40,64 @@ const handleTwoPlusHits = (potentialMoves, potentialHits, randomChoice) => {
       hits.push(moveLow);
     }
     return moveLow;
-  } else {
-    const randomMove = potentialMoves[randomChoice];
-    if (potentialHits.includes(randomMove)) {
-      hits.push(randomMove);
+  } else if (potentialMoves.includes(highestHit - offset)) {
+    if (potentialHits.includes(highestHit - offset)) {
+      hits.push(highestHit - offset);
     }
-    return randomMove;
+    return highestHit - offset;
+  } else if (potentialMoves.includes(lowestHit + offset)) {
+    if (potentialHits.includes(lowestHit + offset)) {
+      hits.push(lowestHit + offset);
+    }
+    return lowestHit + offset;
+  } else if (offset === 1) {
+    if (potentialMoves.includes(highestHit + 10)) {
+      if (potentialHits.includes(highestHit + 10)) {
+        hits.push(highestHit + 10);
+      }
+      return highestHit + 10;
+    } else if (potentialMoves.includes(lowestHit - 10)) {
+      if (potentialHits.includes(lowestHit - 10)) {
+        hits.push(lowestHit - 10);
+      }
+      return lowestHit - 10;
+    } else if (potentialMoves.includes(highestHit - 10)) {
+      if (potentialHits.includes(highestHit - 10)) {
+        hits.push(highestHit - 10);
+      }
+      return highestHit - 10;
+    } else if (potentialMoves.includes(lowestHit + 10)) {
+      if (potentialHits.includes(lowestHit + 10)) {
+        hits.push(lowestHit + 10);
+      }
+      return lowestHit + 10;
+    } else {
+      return handleNoHits(potentialMoves, potentialHits, randomChoice);
+    }
+  } else if (offset >= 10) {
+    if (potentialMoves.includes(highestHit + 1)) {
+      if (potentialHits.includes(highestHit + 1)) {
+        hits.push(highestHit + 1);
+      }
+      return highestHit + 1;
+    } else if (potentialMoves.includes(lowestHit - 1)) {
+      if (potentialHits.includes(lowestHit - 1)) {
+        hits.push(lowestHit - 1);
+      }
+      return lowestHit - 1;
+    } else if (potentialMoves.includes(highestHit - 1)) {
+      if (potentialHits.includes(highestHit - 1)) {
+        hits.push(highestHit - 1);
+      }
+      return highestHit - 1;
+    } else if (potentialMoves.includes(lowestHit + 1)) {
+      if (potentialHits.includes(lowestHit + 1)) {
+        hits.push(lowestHit + 1);
+      }
+      return lowestHit + 1;
+    } else {
+      return handleNoHits(potentialMoves, potentialHits, randomChoice);
+    }
   }
 };
 
