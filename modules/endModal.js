@@ -1,5 +1,6 @@
 import { resetBoards } from './domViews';
 import { clearHitsArray } from './aiLogic';
+import startModalController from './startModal';
 
 const endGameController = (winner) => {
   const resultText = document.querySelector('#result');
@@ -15,6 +16,7 @@ const endGameController = (winner) => {
   const newGame = () => {
     const startModal = document.querySelector('#start-modal');
     resetBoards();
+    startModalController();
     endModal.style.display = 'none';
     startModal.style.display = 'flex';
     resultText.textContent = '';
