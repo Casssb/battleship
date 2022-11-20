@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/boat.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Battleship</title>
+    <script async type="module" crossorigin src="/assets/index.1a2ea72c.js"></script>
+    <link rel="stylesheet" href="/assets/index.cf8a056b.css">
+  </head>
+  <body>
+    <header>
+      <h1 class="header-title">Battleship</h1>
+    </header>
+    <main id="main">
+      <div class="gameboard">
+        <h2 class="player-title">Player</h2>
+      </div>
+      <div class="gameboard">
+        <h2 class="bot-title">Bot</h2>
+      </div>
+    </main>
+    <div class="start-modal" id="start-modal">
+      <h3>Place your 5 ships</h3>
+      <div class="start-btn-container">
+        <button id="rotate">Rotate Ship</button>
+        <button id="random-ships">Random Ships</button>
+      </div>
+      <div class="gameboard"></div>
+      <button class="start-btn" id="start-btn">Start Game</button>
+    </div>
+    <div class="end-modal" id="end-modal">
+      <h3 class="result-text" id="result"></h3>
+      <button id="reset-btn">New Game</button>
+    </div>
+  </body>
+</html>
