@@ -16,6 +16,8 @@ const appendBoards = () => {
   const playerBoard = createBoard('player');
   const botBoard = createBoard('bot');
   const startBoard = createBoard('start');
+  botBoard.style.cursor = 'pointer';
+  startBoard.style.cursor = 'pointer';
   playerBoardContainer.append(playerBoard);
   botBoardContainer.append(botBoard);
   startBoardContainer.append(startBoard);
@@ -32,9 +34,9 @@ const resetBoards = () => {
 };
 
 const appendStartBoardStyles = (playerboard) => {
-  const starttiles = document.querySelectorAll('.start-tile');
+  const startTiles = document.querySelectorAll('.start-tile');
   const shipCoords = playerboard.getShipCoords();
-  starttiles.forEach((tile) => {
+  startTiles.forEach((tile) => {
     const coords = Number(tile.dataset.start);
     if (shipCoords.includes(coords)) {
       tile.classList.add('ship');

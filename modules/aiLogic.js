@@ -136,7 +136,6 @@ const handleNoHits = (potentialMoves, potentialHits, randomChoice) => {
 
 const aiMove = (enemyBoard) => {
   checkHitsArray(enemyBoard);
-  console.log(hits);
   const potentialMoves = [...enemyBoard.possibleMoves];
   const potentialHits = enemyBoard.getShipCoords();
   const randomChoice = Math.floor(Math.random() * potentialMoves.length);

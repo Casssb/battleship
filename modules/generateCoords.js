@@ -68,7 +68,6 @@ const isValidShip = (flatFleetArray, ship, origin, axis) => {
   if (currentAxis === 1) {
     return !taken && !outOfBounds;
   } else {
-    console.log(start, end, badHorizontal, shipLength);
     return !taken && !outOfBounds && !badHorizontal;
   }
 };

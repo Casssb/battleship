@@ -4,7 +4,7 @@ import { init } from './gameController';
 
 const startModalController = () => {
   const shipsArray = [];
-  const flatShipsArray = shipsArray.flat();
+  let flatShipsArray = shipsArray.flat();
   const rotateShipBtn = document.querySelector('#rotate');
   const randomShipBtn = document.querySelector('#random-ships');
   const startGameBtn = document.querySelector('#start-btn');
@@ -18,8 +18,20 @@ const startModalController = () => {
     shipsArray.length = 0;
     shipsArray.push(...randomShips);
     resetBoards();
-    init(randomShips);
+    init(shipsArray);
     startGameBtn.classList.add('go');
+  };
+
+  const placedGame = (target, ship) => {
+    const shipAdded = createShipFromOffsets(target, ship);
+    shipsArray.push(shipAdded);
+    flatShipsArray = shipsArray.flat();
+    shipChoiceCounter += 1;
+    if (shipChoiceCounter > 4) {
+      resetBoards();
+      init(shipsArray);
+      startGameBtn.classList.add('go');
+    }
   };
 
   const startGame = () => {
@@ -59,19 +71,36 @@ const startModalController = () => {
     return ship;
   };
 
-  const handleMouseOver = (tile) => {
+  const createShipFromOffsets = (origin, ship) => {
+    const shipWithOffsets = [];
+
+    ship.forEach((coord) => {
+      shipWithOffsets.push(coord + origin);
+    });
+
+    return shipWithOffsets;
+  };
+
+  const applyClassToTile = (tile, className) => {
     const currentTile = document.querySelector(`[data-start="${tile}"]`);
-    currentTile.classList.add('hover');
+    currentTile.classList.add(`${className}`);
+  };
+
+  const removeClassFromTile = (tile, className) => {
+    const currentTile = document.querySelector(`[data-start="${tile}"]`);
+    currentTile.classList.remove(`${className}`);
+  };
+
+  const handleMouseOver = (tile) => {
+    applyClassToTile(tile, 'hover');
   };
 
   const handleMouseOut = (tile) => {
-    const currentTile = document.querySelector(`[data-start="${tile}"]`);
-    currentTile.classList.remove('hover');
+    removeClassFromTile(tile, 'hover');
   };
 
   const handleClick = (tile) => {
-    const currentTile = document.querySelector(`[data-start="${tile}"]`);
-    currentTile.classList.add('clicked');
+    applyClassToTile(tile, 'clicked');
   };
 
   rotateShipBtn.addEventListener('click', (e) => {
@@ -91,33 +120,45 @@ const startModalController = () => {
 
   startTiles.forEach((tile) => {
     tile.addEventListener('mouseover', (e) => {
+      if (shipChoiceCounter > 4) return;
       const target = Number(e.currentTarget.dataset.start);
       const ship = currentlySelectedShip(axis);
       if (isValidShip(flatShipsArray, ship, target, axis)) {
         ship.forEach((coord) => {
           handleMouseOver(coord + target);
-          console.log(target);
         });
+      } else {
+        applyClassToTile(target, 'error');
       }
     });
   });
 
   startTiles.forEach((tile) => {
     tile.addEventListener('mouseout', (e) => {
+      if (shipChoiceCounter > 4) return;
       const target = Number(e.currentTarget.dataset.start);
       const ship = currentlySelectedShip(axis);
       if (isValidShip(flatShipsArray, ship, target, axis)) {
         ship.forEach((coord) => {
           handleMouseOut(coord + target);
         });
+      } else {
+        removeClassFromTile(target, 'error');
       }
     });
   });
 
   startTiles.forEach((tile) => {
     tile.addEventListener('click', (e) => {
-      const target = e.currentTarget.dataset.start;
-      handleClick(target);
+      if (shipChoiceCounter > 4) return;
+      const target = Number(e.currentTarget.dataset.start);
+      const ship = currentlySelectedShip(axis);
+      if (isValidShip(flatShipsArray, ship, target, axis)) {
+        ship.forEach((coord) => {
+          handleClick(coord + target);
+        });
+        placedGame(target, ship);
+      }
     });
   });
 };
