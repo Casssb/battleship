@@ -17,7 +17,7 @@
   height: 100%;
   width: 100%;
   font-family: var(--ff-main);
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -29,7 +29,8 @@
   padding: 1rem;
   border: none;
   border-radius: 5px;
-  background-color: var(--col-highlight);
+  background-color: var(--col-background);
+  color: var(--col-main);
   box-shadow: var(--box-shadow);
 }
 
@@ -45,19 +46,23 @@
   --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
   --font-size-xxxl: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);
 
-  --col-main: #554d74;
-  --col-secondary: #796ea8;
-  --col-text: #16131a;
-  --col-highlight: #d3d9e9;
-  --col-accent: #a6a9c8;
+  --col-main: #bb86fc;
+  --col-secondary: #03dac6;
+  --col-text: #ffffff;
+  --col-btn-text: #000000;
+  --col-background: #121212;
+  --col-accent: #3700b3;
+  --col-error: #cf6679;
+  --col-error-acc: #ff0266;
 
+  --text-shadow: 0px 2px 14px rgba(8, 8, 8, 0.9);
   --box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 body {
-  background-color: var(--col-main);
-  color: var(--col-text);
+  background-color: var(--col-background);
+  color: var(--col-secondary);
   @include flex(column);
 }
 
@@ -85,34 +90,34 @@ main {
 .player-board,
 .bot-board,
 .start-board {
-  background-color: var(--col-accent);
+  background-color: var(--col-text);
   display: grid;
-  grid-template-columns: repeat(10, 4.5vmin);
-  grid-template-rows: repeat(10, 4.5vmin);
-  border: 2px solid black;
+  grid-template-columns: repeat(10, 5.5vmin);
+  grid-template-rows: repeat(10, 5.5vmin);
+  border: 2px solid var(--col-background);
   box-shadow: var(--box-shadow);
 }
 
 .player-tile,
 .bot-tile,
 .start-tile {
-  border: 1px solid black;
+  border: 1px solid var(--col-background);
 }
 
 .ship {
-  background-color: blue;
+  background-color: var(--col-secondary);
 }
 
 .hit {
-  background-color: orange;
+  background-color: var(--col-error);
 }
 
 .miss {
-  background-color: lightblue;
+  background-color: var(--col-main);
 }
 
 .sunk {
-  background-color: red;
+  background-color: var(--col-error-acc);
 }
 
 /* Start-game modal */
@@ -123,8 +128,8 @@ main {
 
   h3 {
     font-family: var(--ff-title);
-    font-size: var(--font-size-md);
-    text-shadow: 0px 2px 14px rgba(235, 234, 234, 0.77);
+    font-size: var(--font-size-lg);
+    text-shadow: var(--text-shadow);
   }
 
   .start-btn-container {
@@ -136,12 +141,17 @@ main {
     @include button();
 
     &.go {
-      background-color: green;
+      background-color: var(--col-secondary);
+      color: var(--col-btn-text);
+
+      &:hover {
+        background-color: #00a897;
+      }
     }
 
     &:hover {
       cursor: pointer;
-      background-color: #89898b;
+      background-color: #000000;
     }
   }
 }
@@ -157,7 +167,7 @@ main {
 }
 
 .error {
-  background-color: rgb(146, 58, 75);
+  background-color: var(--col-error);
 }
 
 /* End-game modal */
@@ -166,12 +176,25 @@ main {
   @include modal();
   display: none;
 
+  .result-text {
+    font-size: var(--font-size-lg);
+    text-shadow: var(--text-shadow);
+  }
+
   button {
     @include button();
 
     &:hover {
       cursor: pointer;
-      background-color: #89898b;
+      background-color: #000000ea;
     }
+  }
+}
+
+/* Media query for mobile screens */
+
+@media screen and (max-width: 768px) {
+  #main {
+    @include flex(column);
   }
 }
