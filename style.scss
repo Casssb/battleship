@@ -61,6 +61,7 @@
 }
 
 body {
+  height: 100%;
   background-color: var(--col-background);
   color: var(--col-secondary);
   @include flex(column);
@@ -171,6 +172,25 @@ main {
 
 .error {
   background-color: var(--col-error);
+}
+
+/* Footer (link) */
+
+footer {
+  height: min-content;
+  padding: 2rem;
+  .footer-link {
+    height: var(--font-size-lg);
+    width: var(--font-size-lg);
+
+    a {
+      color: var(--col-secondary);
+    }
+
+    &:hover {
+      transform: scale(1.4);
+    }
+  }
 }
 
 /* End-game modal */
