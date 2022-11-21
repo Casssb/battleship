@@ -11,11 +11,12 @@
 @mixin modal {
   position: absolute;
   @include flex(column);
-  gap: 2rem;
+  gap: 1rem;
   top: 0;
   right: 0;
+  width: 100vw;
+  min-height: 100vh;
   height: 100%;
-  width: 100%;
   font-family: var(--ff-main);
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -30,6 +31,7 @@
   border: none;
   border-radius: 5px;
   background-color: var(--col-background);
+  border: 2px solid transparent;
   color: var(--col-main);
   box-shadow: var(--box-shadow);
 }
@@ -62,6 +64,7 @@
 
 body {
   height: 100%;
+  min-height: 100vh;
   background-color: var(--col-background);
   color: var(--col-secondary);
   @include flex(column);
@@ -129,11 +132,16 @@ main {
 .start-modal {
   @include modal();
   display: flex;
+  padding: 0 1rem;
 
   h3 {
     font-family: var(--ff-title);
     font-size: var(--font-size-lg);
     text-shadow: var(--text-shadow);
+    background-color: #121212ee;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 2px solid var(--col-secondary)
   }
 
   .start-btn-container {
@@ -149,13 +157,15 @@ main {
       color: var(--col-btn-text);
 
       &:hover {
-        background-color: #00a897;
+        background-color: #14e9d4;
+        border: 2px solid var(--col-btn-text);
       }
     }
 
     &:hover {
       cursor: pointer;
       background-color: #000000;
+      border: 2px solid var(--col-main);
     }
   }
 }
@@ -202,6 +212,10 @@ footer {
   .result-text {
     font-size: var(--font-size-lg);
     text-shadow: var(--text-shadow);
+    background-color: #121212a9;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 2px solid var(--col-secondary)
   }
 
   button {
@@ -210,14 +224,32 @@ footer {
     &:hover {
       cursor: pointer;
       background-color: #000000ea;
+      border: 2px solid var(--col-main);
     }
   }
 }
 
 /* Media query for mobile screens */
 
+@media screen and (max-width: 1000px) {
+  .player-board,
+  .bot-board,
+  .start-board {
+    display: grid;
+    grid-template-columns: repeat(10, 4.5vmin);
+    grid-template-rows: repeat(10, 4.5vmin);
+  }
+}
+
 @media screen and (max-width: 768px) {
   #main {
     @include flex(column);
+  }
+  .player-board,
+  .bot-board,
+  .start-board {
+    display: grid;
+    grid-template-columns: repeat(10, 6.5vmin);
+    grid-template-rows: repeat(10, 6.5vmin);
   }
 }
