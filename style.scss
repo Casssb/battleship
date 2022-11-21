@@ -66,6 +66,8 @@ body {
   @include flex(column);
 }
 
+/* Header/title section */
+
 header {
   height: min-content;
 }
@@ -76,6 +78,7 @@ header {
 }
 
 /* Main section (player/bot gameboards) */
+
 main {
   height: 100%;
   @include flex(row);
